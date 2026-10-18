@@ -3,13 +3,13 @@
 // English pages live at the root, the Traditional Chinese copies under zh/ with the same file names.
 const CHAPTERS = [
   ['00-intro', 'How to use this book', 0, 1, '本書使用說明'],
-  ['01-sounds', 'Sounds first: the French mouth', 1, 1, '先學發音：法語的口形'],
+  ['01-sounds', 'Sounds first: the French mouth', 1, 1, '先學發音：法語的口型'],
   ['02-etre-avoir', 'Être, avoir and you', 1, 1, 'Être、avoir 與自我介紹'],
   ['03-gender', 'Every noun has a gender', 1, 1, '每個名詞都有陰陽性'],
   ['04-er-verbs', '-ER verbs and saying no', 1, 1, '-ER 動詞與否定句'],
   ['05-questions', 'Asking questions', 1, 1, '怎樣發問'],
   ['06-numbers', 'Numbers, time, dates, prices', 1, 1, '數字、時間、日期、價錢'],
-  ['07-aller-faire-venir', 'Aller, faire, venir: near future, near past', 1, 1, 'Aller、faire、venir：近未來與剛剛過去'],
+  ['07-aller-faire-venir', 'Aller, faire, venir: near future, near past', 1, 1, 'Aller、faire、venir：最近將來時與最近過去時'],
   ['p1-check', 'Part 1 exam check', 1, 1, '第一部分 考試自測'],
   ['08-pc-avoir', 'Passé composé with avoir', 2, 0, '複合過去時（avoir）'],
   ['09-pc-etre', 'Passé composé with être', 2, 0, '複合過去時（être）'],

@@ -55,6 +55,73 @@ An unofficial parody of O'Reilly's Head First series. The joke: programmers lear
 - English is the teaching language. Don't translate the whole chapter into Chinese. Chinese only appears in `zh-note` boxes and hint columns.
 - Check facts that can go stale (IRCC score bands, test formats) against official sources, and attribute them.
 
+## 中文版文風 (the zh/ edition)
+The zh pages must read as if a Hong Kong Chinese teacher wrote them in Chinese, not as a translation. Rewrite the meaning; don't translate the sentence.
+- **Register:** natural 書面語 for a Hong Kong reader, still easy for Taiwan readers. Keep it light and conversational, Head First style, but no Cantonese particles (嘅、咗、唔) outside quoted Cantonese examples.
+- **Hong Kong vocabulary:** 甚麼 / 為甚麼 / 哪裏, 巴士 (not 公車), 按 (not 點擊), 捲動 → 向下看, 生字 or 詞語 (not 單字), 網上, 電郵, 影片, 質素, 程式, 地鐵 for the Montréal métro.
+- **Translationese to remove:**
+  - 「一個」 or 「一些」 before every noun
+  - repeated 你的、它、他們 where Chinese would drop the pronoun
+  - 進行、作出、對於……而言、被 passives
+  - long 的-chains
+  - 「當……的時候」 at the start of a sentence
+  - English word order in questions and lists
+  - jokes that only work in English (keep the joke, re-tell it in Chinese)
+- **Punctuation:** full-width ，。：；？！「」（）. Put a space between Chinese and French or English words. 
+- **Glossary** (use these consistently):
+
+  | Concept | Chinese term |
+  |---|---|
+  | gender | 陰性 / 陽性 |
+  | articles | 定冠詞 / 不定冠詞 / 部分冠詞 |
+  | conjugation | 動詞變位 |
+  | infinitive | 原形動詞 |
+  | agreement | 配合 |
+  | liaison | 聯誦 |
+  | elision | 省音 |
+  | nasal vowel | 鼻化元音 |
+  | French R | 小舌音 R |
+  | vowel / consonant | 元音 / 輔音 |
+  | pronoun | 代詞 |
+  | preposition | 介詞 |
+  | ending | 詞尾 |
+  | h aspiré | 噓音 h |
+  | silent h | 啞音 h |
+  | présent | 現在時 |
+  | passé composé | 複合過去時 |
+  | imparfait | 未完成過去時 |
+  | futur proche | 最近將來時 |
+  | passé récent | 最近過去時 |
+  | inversion | 倒裝 |
+  | question word | 疑問詞 |
+  | negation | 否定 |
+  | ordinal number | 序數詞 |
+  | Québec | 魁北克 |
+  | Montréal | 滿地可 |
+  | Canada | 加拿大 |
+  | Express Entry | 快速通道 |
+  | pronoun | 代詞 |
+  | mouth shape | 口型 |
+  | type (programming) | 型別 |
+  | function (programming) | 函式 |
+
+  Character forms: 噓 (not 嘘), 著 (not 着), 裡 (not 裏), 甚麼 (not 什麼).
+
+- **Box titles:**
+
+  | English | Chinese |
+  |---|---|
+  | Sharpen your pencil | 削尖你的鉛筆 |
+  | Brain Power | 動動腦 |
+  | There are no Dumb Questions | 沒有蠢問題 |
+  | Watch it! | 小心！ |
+  | BULLET POINTS | 重點整理 |
+  | Exam warm-up | 考試熱身 |
+  | Who does what? | 配對遊戲 |
+  | Fireside Chat | 爐邊對談 |
+  | You already know this | 你早就懂了 |
+  | 中文腦 | 中文腦 |
+
 ## Gotchas
 - A single huge Write can trip the content filter. Write a chapter in two parts (a `<!-- PART2 -->` marker, then an Edit).
 - Don't nest `aside` inside `aside`, because check.mjs pairs them with a non-greedy match.
