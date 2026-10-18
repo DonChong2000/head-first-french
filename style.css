@@ -33,9 +33,11 @@
   --zhf: 'Source Serif 4', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; /* Latin (jyutping/pinyin) from Source Serif, Han from Noto */
   --on-accent: #ffffff;
   --shadow: 6px 6px 0;
+  color-scheme: light;
 }
+/* dark: the system setting, unless the reader picked light with the nav button; or whenever they picked dark */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --paper: #161614;
     --ink: #edebe4;
     --muted: #a5a39b;
@@ -62,7 +64,37 @@
     --wrong: #ef5350;
     --accent-miss: #ffb74d;
     --on-accent: #161614;
+    color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --paper: #161614;
+  --ink: #edebe4;
+  --muted: #a5a39b;
+  --rule: #3a3936;
+  --edge: #8a8880;
+  --pencil: #22221f;
+  --hand: #93abff;
+  --link: #93abff;
+  --fr: #ff8a73;
+  --box: #1f1f1c;
+  --hi: #f2b705;
+  --hi-soft: #2e2a1a;
+  --brain: #a5a39b;
+  --watch: #ff7a5c;
+  --zh: #3fc48f;
+  --quebec: #93abff;
+  --quebec-bg: #1c2140;
+  --exam: #a996ff;
+  --bubble-r: #2a1d1a;
+  --bp-bg: #2a2a26;
+  --bp-ink: #edebe4;
+  --bp-fr: #ff8a73;
+  --right: #66bb6a;
+  --wrong: #ef5350;
+  --accent-miss: #ffb74d;
+  --on-accent: #161614;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -218,7 +250,11 @@ details.answer summary { cursor: pointer; font-family: var(--handf); font-size: 
 nav.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1rem; padding: .6rem 16px; background: var(--box); border-bottom: 3px solid var(--ink); font: 600 .95rem var(--head); }
 nav.top a { color: var(--ink); text-decoration: none; }
 nav.top a:first-child { font-size: 1.35rem; font-stretch: 70%; font-weight: 900; text-transform: uppercase; }
-nav.top a:last-child { border: 2px solid var(--ink); border-radius: 6px; padding: .2rem .7rem; }
+nav.top .tools a { display: inline-flex; align-items: center; min-height: 40px; border: 2px solid var(--ink); border-radius: 6px; padding: 0 .8rem; }
+nav.top .tools { display: flex; align-items: center; gap: .5rem; }
+button.theme { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; color: var(--ink); background: var(--box); border: 2px solid var(--ink); border-radius: 6px; cursor: pointer; }
+button.theme:hover, nav.top .tools a:hover { background: var(--hi); color: #141414; }
+button.theme svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 nav.pager { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 1rem; border-top: 4px solid var(--ink); font: 700 1rem var(--head); }
 nav.pager a { text-decoration: none; }
 
