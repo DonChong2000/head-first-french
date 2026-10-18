@@ -1,13 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&family=Kalam:wght@400;700&family=Noto+Sans+TC:wght@400;700&family=LXGW+Marker+Gothic&display=swap');
-
-/* LXGW Marker Gothic sets ：，。 low and to the left (mainland style). Borrow the
-   centred Hong Kong/Taiwan punctuation from the system font for those marks only. */
-@font-face {
-  font-family: 'HF Punct';
-  src: local('Microsoft JhengHei'), local('PingFang TC'), local('PingFangTC-Regular'),
-       local('Noto Sans CJK TC'), local('NotoSansCJKtc-Regular'), local('Noto Sans TC'), local('NotoSansTC-Regular');
-  unicode-range: U+3000-303F, U+FF01-FF0F, U+FF1A-FF1F;
-}
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&family=Kalam:wght@400;700&family=Noto+Sans+TC:wght@400;700&family=LXGW+WenKai+TC:wght@400;700&display=swap');
 
 /* Head First feel: book serif body, plain sans labels, handwriting for titles and notes, thin-ruled boxes */
 :root {
@@ -38,7 +29,7 @@
   --accent-miss: #a85a00;
   --body: 'Libre Baskerville', Baskerville, Georgia, serif;
   --head: 'Source Sans 3', 'Myriad Pro', 'Noto Sans TC', sans-serif;
-  --handf: 'Kalam', 'HF Punct', 'LXGW Marker Gothic', 'Comic Sans MS', cursive; /* Marker Gothic covers the Chinese in handwritten notes */
+  --handf: 'Kalam', 'LXGW WenKai TC', 'Comic Sans MS', cursive; /* WenKai covers the Chinese in handwritten notes */
   --zhf: 'Libre Baskerville', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; /* Latin (jyutping/pinyin) from Baskerville, Han from Noto */
   --on-accent: #ffffff;
   color-scheme: light;
@@ -128,7 +119,6 @@ h3 { font-size: 1.3rem; margin: 2rem 0 .5rem; }
 .lede { font-size: 1.25rem; font-style: italic; color: var(--muted); }
 
 /* handwriting */
-h1, aside > h4:first-child, nav.top a:first-child, .hand, .note, details.answer summary { font-synthesis-weight: none; } /* Marker Gothic has one weight; a fake bold smudges it */
 .hand, .note { font-family: var(--handf); color: var(--hand); font-size: 1.45rem; line-height: 1.2; }
 .note { display: block; margin: .5rem 0 1rem 1.5rem; transform: rotate(-1.5deg); }
 .note::before { content: '\2190  '; }
