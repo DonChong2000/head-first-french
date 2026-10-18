@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Oswald:wght@500;700&family=Noto+Sans+TC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Oswald:wght@500;700&family=Noto+Sans+TC:wght@400;700&family=LXGW+WenKai+TC:wght@400;700&display=swap');
 
 :root {
   --paper: #fbf8f1;
@@ -22,7 +22,7 @@
   --accent-miss: #b26a00;
   --body: 'Literata', Georgia, serif;
   --head: 'Oswald', 'Arial Narrow', sans-serif;
-  --handf: 'Caveat', 'Comic Sans MS', cursive;
+  --handf: 'Caveat', 'LXGW WenKai TC', 'Comic Sans MS', cursive; /* WenKai covers the Chinese in handwritten notes */
   --zhf: 'Literata', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; /* Latin (jyutping/pinyin) from Literata, Han from Noto */
   --on-accent: #ffffff;
 }
@@ -59,6 +59,7 @@ body {
   color: var(--ink);
   font: 1.0625rem/1.65 var(--body);
 }
+html:lang(zh-Hant) body { font-family: var(--zhf); }
 main { max-width: 44rem; margin: 0 auto; padding: 1rem 16px 4rem; }
 img, svg { max-width: 100%; height: auto; }
 a { color: var(--en); }
@@ -152,9 +153,9 @@ th { font-family: var(--head); font-weight: 500; background: color-mix(in srgb, 
 .table-wrap table.wide { min-width: 40rem; } /* scrolls sideways on phones instead of squashing */
 
 /* exercises */
-input[data-answer], select[data-answer] {
+input, select[data-answer] {
   font: inherit; color: var(--ink); background: var(--paper);
-  border: 0; border-bottom: 2px solid var(--muted); padding: 0 .3rem; min-width: 5rem;
+  border: 0; border-bottom: 2px solid var(--muted); padding: 0 .3rem; min-width: 5rem; max-width: 100%;
 }
 select[data-answer] { border: 2px solid var(--muted); border-radius: .3rem; }
 .right { border-color: var(--right) !important; background: color-mix(in srgb, var(--right) 14%, transparent) !important; }

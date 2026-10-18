@@ -25,7 +25,7 @@ export function checkPage(html, dir) {
   for (const [, url] of html.matchAll(/(?:href|src)="([^"#]+)/g))
     if (!/^(https?:|mailto:)/.test(url) && !existsSync(join(dir, url))) errs.push(`broken link ${url}`);
   if (!/<title>[^<]+<\/title>/.test(html)) errs.push('missing <title>');
-  if (!/<script src="(\.\.\/)?book\.js"><\/script>/.test(html)) errs.push('missing book.js');
+  if (!/<script src="(\.\.\/)*book\.js"><\/script>/.test(html)) errs.push('missing book.js');
   return errs;
 }
 
@@ -40,14 +40,41 @@ let failed = 0;
 const report = (name, errs) => { for (const e of errs) { console.log(`${name}: ${e}`); failed++; } };
 
 const src = readFileSync(join(root, 'book.js'), 'utf8');
-const chapters = [...src.matchAll(/\['([\w-]+)', '[^']*', \d, ([01])\]/g)].map(m => ({ file: m[1], ready: m[2] === '1' }));
+const chapters = [...src.matchAll(/\['([\w-]+)', '[^']*', \d, ([01]), '[^']+'\]/g)].map(m => ({ file: m[1], ready: m[2] === '1' }));
 assert(chapters.length > 20, 'could not read CHAPTERS from book.js');
-const onDisk = readdirSync(join(root, 'ch')).filter(f => f.endsWith('.html')).map(f => f.slice(0, -5));
-for (const c of chapters) if (c.ready && !onDisk.includes(c.file)) report('book.js', [`${c.file} is marked ready but ch/${c.file}.html is missing`]);
-for (const f of onDisk) if (!chapters.some(c => c.ready && c.file === f)) report('book.js', [`ch/${f}.html exists but isn't a ready chapter in CHAPTERS`]);
+const list = dir => existsSync(dir) ? readdirSync(dir).filter(f => f.endsWith('.html')).map(f => f.slice(0, -5)) : [];
+const en = list(join(root, 'ch')), zh = list(join(root, 'zh', 'ch'));
+for (const c of chapters) if (c.ready && !en.includes(c.file)) report('book.js', [`${c.file} is marked ready but ch/${c.file}.html is missing`]);
+for (const c of chapters) if (c.ready && !zh.includes(c.file)) report('book.js', [`${c.file} is marked ready but zh/ch/${c.file}.html is missing (the 中文 switch would 404)`]);
+for (const f of en) if (!chapters.some(c => c.ready && c.file === f)) report('book.js', [`ch/${f}.html exists but isn't a ready chapter in CHAPTERS`]);
+for (const f of zh) if (!en.includes(f)) report(`zh/ch/${f}.html`, ['has no English original in ch/']);
 
-report('index.html', checkPage(readFileSync(join(root, 'index.html'), 'utf8'), root));
-for (const f of onDisk) report(`ch/${f}.html`, checkPage(readFileSync(join(root, 'ch', f + '.html'), 'utf8'), join(root, 'ch')));
+const page = (rel, dir, lang) => {
+  if (!existsSync(join(root, rel))) return report(rel, ['missing']);
+  const html = readFileSync(join(root, rel), 'utf8');
+  const errs = checkPage(html, dir);
+  if (!html.includes(`<html lang="${lang}">`)) errs.push(`<html lang> should be "${lang}"`);
+  report(rel, errs);
+};
+page('index.html', root, 'en');
+page('zh/index.html', join(root, 'zh'), 'zh-Hant');
+for (const f of en) page(`ch/${f}.html`, join(root, 'ch'), 'en');
+for (const f of zh) page(`zh/ch/${f}.html`, join(root, 'zh', 'ch'), 'zh-Hant');
 
-console.log(failed ? `${failed} problem(s)` : `ok: ${onDisk.length} chapters, self-test passed`);
+// parity: a translation must keep every French audio clip and every exercise field of its original
+const shape = html => ({
+  fr: (html.match(/class="fr"/g) || []).length,
+  answers: (html.match(/data-answer=/g) || []).length,
+  say: [...html.matchAll(/data-say="([^"]*)"/g)].map(m => m[1]).sort().join('|'),
+});
+for (const f of zh.filter(f => en.includes(f))) {
+  const a = shape(readFileSync(join(root, 'ch', f + '.html'), 'utf8')), b = shape(readFileSync(join(root, 'zh', 'ch', f + '.html'), 'utf8'));
+  const errs = [];
+  if (a.fr !== b.fr) errs.push(`${b.fr} French spans, English has ${a.fr}`);
+  if (a.answers !== b.answers) errs.push(`${b.answers} answer fields, English has ${a.answers}`);
+  if (a.say !== b.say) errs.push('data-say audio differs from English');
+  report(`zh/ch/${f}.html`, errs);
+}
+
+console.log(failed ? `${failed} problem(s)` : `ok: ${en.length} chapters + ${zh.length} 中文, self-test passed`);
 process.exit(failed ? 1 : 0);

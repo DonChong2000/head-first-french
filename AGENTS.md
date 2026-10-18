@@ -16,7 +16,10 @@ An unofficial parody of O'Reilly's Head First series. The joke: programmers lear
 - `assets/cover.jpg`: Don's Gemini-generated parody cover, cropped to remove a fake author byline and scaled to 800px. The original is in Don's Downloads.
 - `style.css`: all the box styles. Don't add per-chapter CSS.
 - `ch/NN-slug.html`: one chapter per file. Copy the head/foot from `ch/01-sounds.html`.
-- `tools/check.mjs`: must pass. `tools/shot.mjs <outdir> <pages...>` screenshots light/dark × desktop/phone.
+- `zh/index.html`, `zh/ch/*.html`: the Traditional Chinese edition (書面語), one copy per English page with the same file name. It has `<html lang="zh-Hant">` and paths one level deeper (`../../style.css`). book.js detects the language from `<html lang>`, takes the 中文 titles from the 5th CHAPTERS field, and adds the EN ⇄ 中文 switch. Only the teaching prose is translated. French, audio, data-say and French data-answers stay identical.
+  - **Workflow:** finish and review the English page first, then translate it with Gemini. The script is in the session scratchpad. The recipe: copy the page to `C:\Users\chong\agy-handoff`, then run `agy -p` and tell it to read the page with its file tool only. Headless mode denies shell commands. Set `[Console]::OutputEncoding = UTF8` before capturing agy's stdout, or the Chinese comes back as CP437 mojibake. Keep the HTML between `<!doctype` and `</html>`.
+  - **Later English fixes:** an English fix made after translation must be repeated by hand in the zh copy.
+- `tools/check.mjs`: must pass. It also fails if a ready chapter has no zh copy, because the 中文 switch would 404. `tools/shot.mjs <outdir> <pages...>` screenshots light/dark × desktop/phone.
 
 ## Chapter shape (see ch/01-sounds.html)
 1. `p.chapter-no`, `h1`, `p.lede` (one-line hook)
