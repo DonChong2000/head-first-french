@@ -100,12 +100,11 @@ The zh pages must read as if a Hong Kong Chinese teacher wrote them in Chinese, 
   | Montréal | 滿地可 |
   | Canada | 加拿大 |
   | Express Entry | 快速通道 |
-  | pronoun | 代詞 |
   | mouth shape | 口型 |
   | type (programming) | 型別 |
   | function (programming) | 函式 |
 
-  Character forms: 噓 (not 嘘), 著 (not 着), 裡 (not 裏), 甚麼 (not 什麼).
+  Character forms: 噓 (not 嘘), 著 (not 着), 裏 (not 裡), 甚麼 (not 什麼).
 
 - **Box titles:**
 
