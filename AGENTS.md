@@ -1,6 +1,6 @@
 # Head First French: chapter guide
 
-An unofficial parody of O'Reilly's Head First series. The joke: programmers learn a new language from Head First, so here's one for French. It takes the reader from zero to NCLC 7 (TEF Canada / TCF Canada). Personal study, shared free with friends, non-commercial. Plain static HTML, no build step, hosted on GitHub Pages.
+An unofficial parody of O'Reilly's Head First series. The joke: programmers learn a new language from Head First, so here's one for French. It takes the reader from zero to NCLC 7 (TEF Canada / TCF Canada). Personal study, shared free with friends, non-commercial. Plain static HTML, no build step. Live at https://donchong2000.github.io/head-first-french/ (GitHub Pages from `main`, repo DonChong2000/head-first-french). A push to main redeploys it.
 
 **Reader:** English at CLB 7–9, native Cantonese and/or Mandarin, aiming at Canadian immigration French points.
 
