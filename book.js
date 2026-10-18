@@ -86,7 +86,7 @@ function check(btn) {
   const fields = box.querySelectorAll('[data-answer]');
   for (const f of fields) {
     const ok = f.dataset.answer.split('|').map(norm), v = norm(f.value);
-    const r = ok.includes(v), a = !r && v && ok.map(bare).includes(bare(v));
+    const r = ok.includes(v), a = !r && !!v && ok.map(bare).includes(bare(v));
     f.classList.remove('right', 'wrong', 'accent');
     f.classList.add(r ? 'right' : a ? 'accent' : 'wrong');
     right += r; accent += a;
