@@ -12,7 +12,7 @@ An unofficial parody of O'Reilly's Head First series. The joke: programmers lear
 - Audio is the browser's Web Speech API. Every French word or sentence the reader should hear goes in `<span class="fr">`. Use `data-say` when the spoken text differs from the shown text (e.g. a ▶ button).
 
 ## Files
-- `book.js`: the `CHAPTERS` list (`[file, title, part, ready]`). Set `ready` to 1 when a chapter ships. It also handles speech, the answer checker, nav and done ticks.
+- `book.js`: the `CHAPTERS` list (`[file, title, part, ready]`). Set `ready` to 1 when a chapter ships. It also handles speech, the answer checker, nav and done ticks. An empty `<p class="rec"></p>` in a speaking exercise becomes a 🎙 record button with a player; the recording stays in the tab and is never uploaded.
 - `assets/cover.jpg`: Don's Gemini-generated parody cover, cropped to remove a fake author byline and scaled to 800px. The original is in Don's Downloads.
 - `style.css`: all the box styles. Don't add per-chapter CSS.
 - `ch/NN-slug.html`: one chapter per file. Copy the head/foot from `ch/01-sounds.html`.

@@ -39,11 +39,13 @@ const T = zh
       book: 'Head First French 法語', other: 'English', soon: '（即將推出）', more: '更多章節即將推出', done: '完成本章', undo: '✓ 已完成（按此取消）',
       noVoice: '找不到法語語音。Windows：設定 > 時間與語言 > 語音 > 新增語音 > Français。Edge 的語音最自然。',
       slip: n => `（另有 ${n} 個只錯重音符號）`,
+      rec: ['🎙 錄音', '■ 停止'], noMic: '用不到麥克風。請在瀏覽器設定中允許這個網站使用麥克風。',
       foot: '非官方戲仿作品，僅供個人學習。免費、非商業用途，與 O\'Reilly Media 無關。' }
   : { parts: ['Front matter', 'Part 1 · A1 · NCLC 1–3', 'Part 2 · A2 · NCLC 4–5', 'Part 3 · B1 · NCLC 5–6', 'Part 4 · B2 · NCLC 7'],
       book: 'Head First French', other: '中文', soon: ' (coming)', more: 'More chapters coming', done: 'I finished this chapter', undo: '✓ Finished (click to undo)',
       noVoice: 'No French voice found. Windows: Settings > Time & language > Speech > Add voices > Français. Edge has the most natural ones.',
       slip: n => ` (+${n} with an accent slip)`,
+      rec: ['🎙 Record', '■ Stop'], noMic: "Can't use the microphone. Allow this site to use it in your browser settings.",
       foot: 'Unofficial parody for personal study. Free, non-commercial, not affiliated with O\'Reilly Media.' };
 const title = c => zh ? c[4] : c[1];
 
@@ -96,9 +98,31 @@ function check(btn) {
   out.textContent = `  ${right} / ${fields.length}` + (accent ? T.slip(accent) : '') + (right === fields.length ? '  Bravo !' : '');
 }
 
+// ---- recorder: an empty p.rec gets a mic button and a player. The audio stays in this tab, nothing is uploaded.
+let rec;
+async function record(btn) {
+  if (rec?.state === 'recording') return rec.stop();
+  let stream;
+  try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch { return alert(T.noMic); }
+  const chunks = [], r = rec = new MediaRecorder(stream);
+  r.ondataavailable = e => chunks.push(e.data);
+  r.onstop = () => {
+    stream.getTracks().forEach(t => t.stop());
+    const audio = btn.nextElementSibling;
+    if (audio.src) URL.revokeObjectURL(audio.src);
+    audio.src = URL.createObjectURL(new Blob(chunks, { type: r.mimeType }));
+    audio.hidden = false;
+    btn.textContent = T.rec[0];
+  };
+  r.start();
+  btn.textContent = T.rec[1];
+}
+
 document.addEventListener('click', e => {
   const fr = e.target.closest('.fr');
   if (fr) return say(fr);
+  const mic = e.target.closest('button.rec');
+  if (mic) return record(mic);
   const btn = e.target.closest('button.check');
   if (btn) return check(btn);
   const done = e.target.closest('button.done');
@@ -112,6 +136,7 @@ const doneText = () => store.get('done:' + here) ? T.undo : T.done;
 
 // ---- page chrome
 document.querySelectorAll('span.fr').forEach(s => { s.tabIndex = 0; s.setAttribute('role', 'button'); s.lang = 'fr'; });
+if (window.MediaRecorder) document.querySelectorAll('p.rec').forEach(p => { p.innerHTML = `<button class="rec">${T.rec[0]}</button> <audio controls hidden></audio>`; });
 
 const i = CHAPTERS.findIndex(c => c[0] === here);
 const page = i >= 0 ? 'ch/' + here + '.html' : 'index.html';
