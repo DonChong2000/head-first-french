@@ -163,7 +163,7 @@ select[data-answer] option { color: var(--ink); background: var(--paper); } /* t
 .wrong { border-color: var(--wrong) !important; background: color-mix(in srgb, var(--wrong) 14%, transparent) !important; }
 .accent { border-color: var(--accent-miss) !important; background: color-mix(in srgb, var(--accent-miss) 14%, transparent) !important; }
 ol.ex li { margin: .6rem 0; }
-p.rec audio { vertical-align: middle; max-width: 100%; margin-top: .5rem; }
+button.rec.on { background: var(--wrong); color: var(--on-accent); }
 button.check, button.done, button.rec {
   font: 500 1rem var(--head); letter-spacing: .05em; text-transform: uppercase;
   background: var(--ink); color: var(--paper); border: 0; border-radius: .3rem; padding: .5rem 1rem; cursor: pointer; margin-top: .5rem;
